@@ -293,6 +293,12 @@ class ReportMrpProductionsummaryXlsx(models.AbstractModel):
         worksheet.write(n, m, total_kms, result_int_format)
         n += 1
         m = 0
+        worksheet.write(n, m, "Velocidad Media", result_int_format)
+        m += 1
+        speed = sum(objects.mapped("speed_consume_unit")) / 60
+        worksheet.write(n, m, speed, result_two_decimal)
+        n += 1
+        m = 0
         worksheet.write(n, m, "Media personal", result_int_format)
         personal = objects.saca_line_id.mapped("staff")
         average_personal = sum(personal) / productions
